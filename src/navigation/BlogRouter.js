@@ -1,11 +1,11 @@
-import Navbar from './Navbar';
-import Home from './Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Create from './Create';
-import BlogDetails from './BlogDetails';
-import NotFound from './NotFound';
+import Navbar from '../components/Navbar';
+import Home from '../screens/Home';
+import Create from '../components/Create';
+import BlogDetails from './BlogsDetails';
+import NotFound from '../components/NotFound';
 
-function App() {
+const BlogRouter = () => {
   return (
     <Router>
       <div className="App">
@@ -29,6 +29,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
-export default App;
+export default BlogRouter;
