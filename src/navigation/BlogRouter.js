@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Home from '../screens/Home';
-import Create from '../components/Create';
-import BlogDetails from './BlogsDetails';
-import NotFound from '../components/NotFound';
+import Navbar from '/components/Navbar/Navbar';
+import Home from '/screens/Home';
+import Create from '/components/Create/Create';
+import BlogDetails from 'components/BlogDetails/BlogsDetails';
+import NotFound from '/components/Error/NotFound';
 
 const BlogRouter = () => {
   return (
