@@ -1,17 +1,18 @@
-import { useHistory, useParams } from 'react-router-dom';
-import useFetch from 'hooks/useFetch';
+import { useHistory } from 'react-router-dom';
+import { useQuery } from 'react-query';
+
+const fetchBlog = async (id) => {
+  const res = await fetch('http://localhost:8000/blogs/' + id);
+  return res.json();
+};
 
 const BlogDetails = () => {
-  const { id } = useParams();
-  const {
-    data: blog,
-    error,
-    isPending,
-  } = useFetch('http://localhost:8000/blogs/' + id);
+  const { data, status } = useQuery('blog', fetchBlog);
+
   const history = useHistory();
 
   const handleClick = () => {
-    fetch('http://localhost:8000/blogs/' + blog.id, {
+    fetch('http://localhost:8000/blogs/' + data.id, {
       method: 'DELETE',
     }).then(() => {
       history.push('/');
@@ -20,13 +21,13 @@ const BlogDetails = () => {
 
   return (
     <div className="blog-details">
-      {isPending && <div>Loading...</div>}
-      {error && <div>{error}</div>}
-      {blog && (
+      {status === 'error' && <div>Error fetching data</div>}
+      {status === 'loading' && <div>Loading data...</div>}
+      {status === 'success' && (
         <article>
-          <h2>{blog.title}</h2>
-          <p>Written by {blog.author}</p>
-          <div>{blog.body}</div>
+          <h2>{data.title}</h2>
+          <p>Written by {data.author}</p>
+          <div>{data.body}</div>
           <button onClick={handleClick}>delete</button>
         </article>
       )}
